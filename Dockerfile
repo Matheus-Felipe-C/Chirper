@@ -28,8 +28,8 @@ RUN docker-php-ext-install \
 WORKDIR /var/www
 COPY --from=composer /app /var/www
 
-# Nginx config
-COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+# Nginx config (snippet only — http.d is included inside http {}, so no "events"/"http" block)
+COPY docker/nginx-http-snippet.conf /etc/nginx/http.d/default.conf
 
 RUN mkdir -p /run/nginx /var/lib/nginx/tmp \
     && chown -R www-data:www-data /var/www
